@@ -7,12 +7,15 @@
 
 import Foundation
 
-protocol SDSAPI {
+protocol SDAPI {
     /// Throws VSError
-    func loadArticlesList() async throws -> [String: [Article]]
+    func loadArticlesList() async throws -> ArticleCategoriesList
+    
+    /// TESTING
+    func loadTest() async throws -> TestCategoriesList
 }
 
-extension SDSAPI {
+extension SDAPI {
     func decodeApiResponse<T: Decodable>(data: Data) throws -> T {
         do {
             let object: T = try JSONDecoder().decode(T.self, from: data)

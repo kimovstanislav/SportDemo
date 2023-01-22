@@ -7,8 +7,93 @@
 
 import Foundation
 
-struct ArticlesList {
-    let data: [String: [Article]]
+struct TestCategoriesList: Decodable {
+//    let testCategories: [Test]
+    let testCategories: [String: [Test]]
+    
+    private enum CodingKeys: String, CodingKey {
+        case data
+    }
+    
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        testCategories = try container.decode([Test].self, forKey: CodingKeys.data)
+//        print("> TestCategoriesList - testCategories: \(testCategories)")
+//    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        testCategories = try container.decode([String: [Test]].self, forKey: CodingKeys.data)
+        print("> TestCategoriesList - testCategories: \(testCategories)")
+    }
+}
+
+//struct TestCategory: Decodable {
+//    let tests: [Test]
+//}
+
+struct Test: Decodable, Identifiable {
+    let id: Int
+    let text: String
+    
+    private enum ContainerKeys: String, CodingKey {
+        case data
+    }
+    
+    private enum DataKeys: String, CodingKey {
+        case id
+        case text
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ContainerKeys.self)
+        let dataContainer = try container.nestedContainer(keyedBy: DataKeys.self, forKey: ContainerKeys.data)
+        id = try dataContainer.decode(Int.self, forKey: DataKeys.id)
+        text = try dataContainer.decode(String.self, forKey: DataKeys.text)
+        print("> Test - id: \(id) - text: \(text)")
+    }
+}
+
+//// TESTING ABOVE
+
+struct ArticleCategoriesList: Decodable {
+    let articleCategories: [ArticleCategory]?
+    
+    private enum CodingKeys: String, CodingKey {
+        case data
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let articlesResponse: [String: ArticleCategoryResponse] = try? container.decode([String: ArticleCategoryResponse].self, forKey: .data) {
+            var resultArticleCategories = [ArticleCategory]()
+            articlesResponse.forEach { (key: String, value: ArticleCategoryResponse) in
+                resultArticleCategories.append(ArticleCategory(categoryName: key, articles: value.articles))
+            }
+            articleCategories = resultArticleCategories
+        } else {
+            articleCategories = nil
+        }
+    }
+}
+
+struct ArticleCategory {
+    // TODO: would be better to add an actual category here. But feels a bit messy from parsing perspective.
+    let categoryName: String
+    let articles: [Article]
+}
+
+struct ArticleCategoryResponse: Decodable {
+    let articles: [Article]
+    
+    private enum CodingKeys: String, CodingKey {
+        case data
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        articles = try container.decode([Article].self, forKey: .data)
+        print("> ArticleCategoryResponse - articles: \(articles)")
+    }
 }
 
 struct Article: Decodable, Identifiable {
