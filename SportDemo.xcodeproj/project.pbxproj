@@ -28,6 +28,8 @@
 		28B78CC7297F1464009ACF1F /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC6297F1464009ACF1F /* BaseViewModel.swift */; };
 		28B78CC9297F1491009ACF1F /* ErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC8297F1491009ACF1F /* ErrorLogger.swift */; };
 		28B78CCB297F30C4009ACF1F /* AcessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */; };
+		28B78CCE297F40AD009ACF1F /* SwiftUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCD297F40AD009ACF1F /* SwiftUIWebView.swift */; };
+		28B78CD0297F4342009ACF1F /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCF297F4342009ACF1F /* ArticleDetailView.swift */; };
 		28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */; };
 		28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */; };
 		28DAB4DE297AE8E3007B75BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DAB4DD297AE8E3007B75BA /* Assets.xcassets */; };
@@ -76,6 +78,8 @@
 		28B78CC6297F1464009ACF1F /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		28B78CC8297F1491009ACF1F /* ErrorLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLogger.swift; sourceTree = "<group>"; };
 		28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcessibilityIdentifiers.swift; sourceTree = "<group>"; };
+		28B78CCD297F40AD009ACF1F /* SwiftUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIWebView.swift; sourceTree = "<group>"; };
+		28B78CCF297F4342009ACF1F /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
 		28DAB4D6297AE8E2007B75BA /* SportDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDemoApp.swift; sourceTree = "<group>"; };
 		28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				28B78CC1297F1363009ACF1F /* ViewModelFactory.swift */,
 				28B78CC3297F1449009ACF1F /* General */,
 				28B78CC0297F1342009ACF1F /* Articles List */,
+				28B78CCC297F4095009ACF1F /* Article Detail */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,8 +235,17 @@
 			children = (
 				28B78CC4297F145B009ACF1F /* AlertViewModel.swift */,
 				28B78CC6297F1464009ACF1F /* BaseViewModel.swift */,
+				28B78CCD297F40AD009ACF1F /* SwiftUIWebView.swift */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		28B78CCC297F4095009ACF1F /* Article Detail */ = {
+			isa = PBXGroup;
+			children = (
+				28B78CCF297F4342009ACF1F /* ArticleDetailView.swift */,
+			);
+			path = "Article Detail";
 			sourceTree = "<group>";
 		};
 		28DAB4CD297AE8E2007B75BA = {
@@ -438,6 +452,7 @@
 				28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */,
 				28B78CCB297F30C4009ACF1F /* AcessibilityIdentifiers.swift in Sources */,
 				287AC078297DA1FC0003A0B7 /* SDError+API.swift in Sources */,
+				28B78CCE297F40AD009ACF1F /* SwiftUIWebView.swift in Sources */,
 				28B78CC9297F1491009ACF1F /* ErrorLogger.swift in Sources */,
 				28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */,
 				28B78CBC297EF5FF009ACF1F /* APIClient+ErrorMapping.swift in Sources */,
@@ -448,6 +463,7 @@
 				287AC073297DA0F30003A0B7 /* SDError.swift in Sources */,
 				28B78CBF297EF65C009ACF1F /* HTTPStatusCode.swift in Sources */,
 				287AC06E297D8AE50003A0B7 /* SDAPI.swift in Sources */,
+				28B78CD0297F4342009ACF1F /* ArticleDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

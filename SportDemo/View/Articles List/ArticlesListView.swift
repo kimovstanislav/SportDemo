@@ -50,10 +50,9 @@ struct ArticlesListView: View {
     
     private func articlesListView(articles: [Article]) -> some View {
         List(articles.indices, id: \.self) { index in
-            // TODO: make an actual detail screen
-//            NavigationLink(destination: ArticleDetailView(viewModel: ArticleDetailViewModel(article: articles[index]))) {
+            NavigationLink(destination: ArticleDetailView(url: URL(string: articles[index].url)!)) {
                 articleCell(article: articles[index])
-//            }
+            }
             .accessibility(identifier: String(format: AccessibilityIdentifiers.ArticlesList.listCellFormat, index))
         }
         .listStyle(PlainListStyle())
