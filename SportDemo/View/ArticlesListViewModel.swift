@@ -9,11 +9,11 @@ import Foundation
 
 class ArticlesListViewModel: ObservableObject {
     init() {
-        print(">>>!!!!! HALLO!!!!!<<<<<")
+        // TODO: this is just testing. To make proper loading later.
         Task {
             do {
-                let mockApiClient = MockAPIClient()
-                let result = try await mockApiClient.loadArticlesList()
+                let apiClient = APIClient()
+                let result = try await apiClient.loadArticlesList()
                 print("\n\n\n\n\n=> sections count: \(result.sections.count)\n\n\n\n\nresult: \(result)")
             }
             catch let error as SDError  {

@@ -20,6 +20,9 @@
 		28B78CB3297DF659009ACF1F /* DateFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CB2297DF659009ACF1F /* DateFormats.swift */; };
 		28B78CB5297ED83F009ACF1F /* UnexpectedCodePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CB4297ED83F009ACF1F /* UnexpectedCodePath.swift */; };
 		28B78CB8297EDD75009ACF1F /* SDAPI+ArticlesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CB7297EDD75009ACF1F /* SDAPI+ArticlesList.swift */; };
+		28B78CBA297EF5C7009ACF1F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CB9297EF5C7009ACF1F /* APIClient.swift */; };
+		28B78CBC297EF5FF009ACF1F /* APIClient+ErrorMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CBB297EF5FF009ACF1F /* APIClient+ErrorMapping.swift */; };
+		28B78CBF297EF65C009ACF1F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CBE297EF65C009ACF1F /* HTTPStatusCode.swift */; };
 		28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */; };
 		28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */; };
 		28DAB4DE297AE8E3007B75BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DAB4DD297AE8E3007B75BA /* Assets.xcassets */; };
@@ -60,6 +63,9 @@
 		28B78CB2297DF659009ACF1F /* DateFormats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormats.swift; sourceTree = "<group>"; };
 		28B78CB4297ED83F009ACF1F /* UnexpectedCodePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnexpectedCodePath.swift; sourceTree = "<group>"; };
 		28B78CB7297EDD75009ACF1F /* SDAPI+ArticlesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDAPI+ArticlesList.swift"; sourceTree = "<group>"; };
+		28B78CB9297EF5C7009ACF1F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		28B78CBB297EF5FF009ACF1F /* APIClient+ErrorMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIClient+ErrorMapping.swift"; sourceTree = "<group>"; };
+		28B78CBE297EF65C009ACF1F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		28DAB4D6297AE8E2007B75BA /* SportDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDemoApp.swift; sourceTree = "<group>"; };
 		28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -110,6 +116,8 @@
 		287AC06A297D899C0003A0B7 /* APIClient */ = {
 			isa = PBXGroup;
 			children = (
+				28B78CB9297EF5C7009ACF1F /* APIClient.swift */,
+				28B78CBB297EF5FF009ACF1F /* APIClient+ErrorMapping.swift */,
 			);
 			path = APIClient;
 			sourceTree = "<group>";
@@ -187,6 +195,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		28B78CBD297EF64D009ACF1F /* Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				28B78CBE297EF65C009ACF1F /* HTTPStatusCode.swift */,
+			);
+			path = Definitions;
+			sourceTree = "<group>";
+		};
 		28DAB4CD297AE8E2007B75BA = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +233,7 @@
 				28B78CAE297DD249009ACF1F /* View */,
 				287AC067297D88EE0003A0B7 /* Data Layer */,
 				287AC071297DA0A60003A0B7 /* Error Handling */,
+				28B78CBD297EF64D009ACF1F /* Definitions */,
 				287AC074297DA1310003A0B7 /* Utility */,
 			);
 			path = SportDemo;
@@ -380,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28B78CA6297DBBED009ACF1F /* JsonHelper.swift in Sources */,
+				28B78CBA297EF5C7009ACF1F /* APIClient.swift in Sources */,
 				287AC076297DA13D0003A0B7 /* SDStrings.swift in Sources */,
 				28B78CA4297DBB53009ACF1F /* MockAPIClient.swift in Sources */,
 				28B78CB0297DD268009ACF1F /* ArticlesListViewModel.swift in Sources */,
@@ -387,10 +405,12 @@
 				28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */,
 				287AC078297DA1FC0003A0B7 /* SDError+API.swift in Sources */,
 				28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */,
+				28B78CBC297EF5FF009ACF1F /* APIClient+ErrorMapping.swift in Sources */,
 				28B78CB3297DF659009ACF1F /* DateFormats.swift in Sources */,
 				287AC069297D89970003A0B7 /* Article.swift in Sources */,
 				28B78CB8297EDD75009ACF1F /* SDAPI+ArticlesList.swift in Sources */,
 				287AC073297DA0F30003A0B7 /* SDError.swift in Sources */,
+				28B78CBF297EF65C009ACF1F /* HTTPStatusCode.swift in Sources */,
 				287AC06E297D8AE50003A0B7 /* SDAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

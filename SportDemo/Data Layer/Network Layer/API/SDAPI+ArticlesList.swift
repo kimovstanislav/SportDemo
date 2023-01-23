@@ -8,7 +8,10 @@
 import Foundation
 
 // Need special parcing for a dynamic json response for ArticleList.
-// TODO: make a separate json decoder class for that? Or even use a Strategy pattern? Or fine to just have a separate extension file for that? In any case for a current small project it's enough, and it's not hard to change if need to scale in theoretical future.
+/* Could make a separate json decoder class for that. Or even use a Strategy pattern.
+ But it's fine to just have a separate extension file for that.
+ In any case for a current small project it's enough, and it's not hard to change if need to scale in theoretical future.
+ */
 extension SDAPI {
     func decodeArtlicesListResponse(data: Data) throws -> ArticleListResponse {
         do {
@@ -76,13 +79,3 @@ extension SDAPI {
         return ArticleListSection(data: .add(AddSection(adds: adds)))
     }
 }
-
-/*
- value:
- {
-                 "type": "ad_banner",
-                 "data": {
-                     "id": 3366048,
-                     "sticky": false
-                 }
- */

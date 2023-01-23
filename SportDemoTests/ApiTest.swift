@@ -18,8 +18,7 @@ final class ApiTest: XCTestCase {
                 XCTAssert(result.sections.count == 6)
             }
             catch let error as SDError  {
-//                Task.detached { @MainActor in
-                await MainActor.run {
+                Task.detached { @MainActor in
                     XCTFail(error.message)
                 }
             }

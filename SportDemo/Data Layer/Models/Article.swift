@@ -74,11 +74,9 @@ struct Article: Decodable, Identifiable {
         text = try dataContainer.decode(String.self, forKey: DataKeys.text)
         category = try dataContainer.decode(Category.self, forKey: DataKeys.category)
         let dateStr = try dataContainer.decode(String.self, forKey: DataKeys.date)
-        // TODO: better way to handle than just make optional?
         date = dateStr.toDate(DateFormats.full)
         image = try dataContainer.decode(Image.self, forKey: DataKeys.image)
         url = try dataContainer.decode(String.self, forKey: DataKeys.url)
-        print("> Article - id: \(id) - title: \(title) - text: \(text)")
     }
 }
 
