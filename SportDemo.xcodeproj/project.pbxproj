@@ -23,6 +23,10 @@
 		28B78CBA297EF5C7009ACF1F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CB9297EF5C7009ACF1F /* APIClient.swift */; };
 		28B78CBC297EF5FF009ACF1F /* APIClient+ErrorMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CBB297EF5FF009ACF1F /* APIClient+ErrorMapping.swift */; };
 		28B78CBF297EF65C009ACF1F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CBE297EF65C009ACF1F /* HTTPStatusCode.swift */; };
+		28B78CC2297F1363009ACF1F /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC1297F1363009ACF1F /* ViewModelFactory.swift */; };
+		28B78CC5297F145B009ACF1F /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC4297F145B009ACF1F /* AlertViewModel.swift */; };
+		28B78CC7297F1464009ACF1F /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC6297F1464009ACF1F /* BaseViewModel.swift */; };
+		28B78CC9297F1491009ACF1F /* ErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC8297F1491009ACF1F /* ErrorLogger.swift */; };
 		28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */; };
 		28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */; };
 		28DAB4DE297AE8E3007B75BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DAB4DD297AE8E3007B75BA /* Assets.xcassets */; };
@@ -66,6 +70,10 @@
 		28B78CB9297EF5C7009ACF1F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		28B78CBB297EF5FF009ACF1F /* APIClient+ErrorMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIClient+ErrorMapping.swift"; sourceTree = "<group>"; };
 		28B78CBE297EF65C009ACF1F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		28B78CC1297F1363009ACF1F /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
+		28B78CC4297F145B009ACF1F /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
+		28B78CC6297F1464009ACF1F /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		28B78CC8297F1491009ACF1F /* ErrorLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLogger.swift; sourceTree = "<group>"; };
 		28DAB4D6297AE8E2007B75BA /* SportDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDemoApp.swift; sourceTree = "<group>"; };
 		28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 				28B78CA5297DBBED009ACF1F /* JsonHelper.swift */,
 				28B78CB2297DF659009ACF1F /* DateFormats.swift */,
 				28B78CB4297ED83F009ACF1F /* UnexpectedCodePath.swift */,
+				28B78CC8297F1491009ACF1F /* ErrorLogger.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -180,8 +189,9 @@
 		28B78CAE297DD249009ACF1F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */,
-				28B78CAF297DD268009ACF1F /* ArticlesListViewModel.swift */,
+				28B78CC1297F1363009ACF1F /* ViewModelFactory.swift */,
+				28B78CC3297F1449009ACF1F /* General */,
+				28B78CC0297F1342009ACF1F /* Articles List */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,6 +211,24 @@
 				28B78CBE297EF65C009ACF1F /* HTTPStatusCode.swift */,
 			);
 			path = Definitions;
+			sourceTree = "<group>";
+		};
+		28B78CC0297F1342009ACF1F /* Articles List */ = {
+			isa = PBXGroup;
+			children = (
+				28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */,
+				28B78CAF297DD268009ACF1F /* ArticlesListViewModel.swift */,
+			);
+			path = "Articles List";
+			sourceTree = "<group>";
+		};
+		28B78CC3297F1449009ACF1F /* General */ = {
+			isa = PBXGroup;
+			children = (
+				28B78CC4297F145B009ACF1F /* AlertViewModel.swift */,
+				28B78CC6297F1464009ACF1F /* BaseViewModel.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		28DAB4CD297AE8E2007B75BA = {
@@ -397,17 +425,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				28B78CA6297DBBED009ACF1F /* JsonHelper.swift in Sources */,
+				28B78CC2297F1363009ACF1F /* ViewModelFactory.swift in Sources */,
 				28B78CBA297EF5C7009ACF1F /* APIClient.swift in Sources */,
+				28B78CC5297F145B009ACF1F /* AlertViewModel.swift in Sources */,
 				287AC076297DA13D0003A0B7 /* SDStrings.swift in Sources */,
 				28B78CA4297DBB53009ACF1F /* MockAPIClient.swift in Sources */,
 				28B78CB0297DD268009ACF1F /* ArticlesListViewModel.swift in Sources */,
 				28B78CB5297ED83F009ACF1F /* UnexpectedCodePath.swift in Sources */,
 				28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */,
 				287AC078297DA1FC0003A0B7 /* SDError+API.swift in Sources */,
+				28B78CC9297F1491009ACF1F /* ErrorLogger.swift in Sources */,
 				28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */,
 				28B78CBC297EF5FF009ACF1F /* APIClient+ErrorMapping.swift in Sources */,
 				28B78CB3297DF659009ACF1F /* DateFormats.swift in Sources */,
 				287AC069297D89970003A0B7 /* Article.swift in Sources */,
+				28B78CC7297F1464009ACF1F /* BaseViewModel.swift in Sources */,
 				28B78CB8297EDD75009ACF1F /* SDAPI+ArticlesList.swift in Sources */,
 				287AC073297DA0F30003A0B7 /* SDError.swift in Sources */,
 				28B78CBF297EF65C009ACF1F /* HTTPStatusCode.swift in Sources */,

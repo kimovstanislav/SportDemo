@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArticlesListView: View {
-    @ObservedObject var viewModel = ArticlesListViewModel()
+    @ObservedObject var viewModel:  ArticlesListViewModel
     
     var body: some View {
         VStack {
@@ -23,6 +23,6 @@ struct ArticlesListView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticlesListView()
+        ArticlesListView(viewModel: ViewModelFactory.shared.makeArticlesListViewModel())
     }
 }

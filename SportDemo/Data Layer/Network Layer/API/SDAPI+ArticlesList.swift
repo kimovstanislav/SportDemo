@@ -26,6 +26,7 @@ extension SDAPI {
         }
     }
     
+    // TODO: check if it's correct. private is limited by it's scope ({ .. })
     // It's fine to have generic names for these functions, as they are private, and only visible in this scope.
     private func processJson(json: [String: Any]) throws -> ArticleListResponse {
         if let dataJson: [String: Any] = json["data"] as? [String: Any] {
