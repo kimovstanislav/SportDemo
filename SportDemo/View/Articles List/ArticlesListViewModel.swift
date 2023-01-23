@@ -62,9 +62,9 @@ extension ArticlesListViewModel {
     private func handleGetApiArticlesSuccess(_ sections: [ArticleListSection]) {
         let articles = allArticlesFromSections(sections)
         let sortedArticles = articles.sorted { article1, article2 in
-            guard let date1 = article1.date else { return true }
-            guard let date2 = article2.date else { return false }
-            return date1 < date2
+            guard let date1 = article1.date else { return false }
+            guard let date2 = article2.date else { return true }
+            return date1 > date2
         }
         updateArticlesList(sortedArticles)
     }
@@ -103,6 +103,7 @@ extension ArticlesListViewModel {
         case showError(errorMessage: String)
     }
     
+    // TODO: to add filter by category
     enum Event {
         /// UI lifecycle
         case onAppear

@@ -11,7 +11,7 @@ enum DateFormats {
     static let full = "YYYY-MM-dd'T'HH:mm:ssZ"
     // 2023-01-22T15:00:01+0100
     // "2022-08-10T10:10:49+0200"
-    static let display = "YYYY-MM-dd"
+    static let display = "YYYY-MM-dd HH:mm"
 }
 
 extension String {

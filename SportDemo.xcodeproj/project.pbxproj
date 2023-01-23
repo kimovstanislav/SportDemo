@@ -27,6 +27,7 @@
 		28B78CC5297F145B009ACF1F /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC4297F145B009ACF1F /* AlertViewModel.swift */; };
 		28B78CC7297F1464009ACF1F /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC6297F1464009ACF1F /* BaseViewModel.swift */; };
 		28B78CC9297F1491009ACF1F /* ErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CC8297F1491009ACF1F /* ErrorLogger.swift */; };
+		28B78CCB297F30C4009ACF1F /* AcessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */; };
 		28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */; };
 		28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */; };
 		28DAB4DE297AE8E3007B75BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DAB4DD297AE8E3007B75BA /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		28B78CC4297F145B009ACF1F /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		28B78CC6297F1464009ACF1F /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		28B78CC8297F1491009ACF1F /* ErrorLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLogger.swift; sourceTree = "<group>"; };
+		28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		28DAB4D6297AE8E2007B75BA /* SportDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDemoApp.swift; sourceTree = "<group>"; };
 		28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				28B78CB2297DF659009ACF1F /* DateFormats.swift */,
 				28B78CB4297ED83F009ACF1F /* UnexpectedCodePath.swift */,
 				28B78CC8297F1491009ACF1F /* ErrorLogger.swift */,
+				28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				28B78CB0297DD268009ACF1F /* ArticlesListViewModel.swift in Sources */,
 				28B78CB5297ED83F009ACF1F /* UnexpectedCodePath.swift in Sources */,
 				28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */,
+				28B78CCB297F30C4009ACF1F /* AcessibilityIdentifiers.swift in Sources */,
 				287AC078297DA1FC0003A0B7 /* SDError+API.swift in Sources */,
 				28B78CC9297F1491009ACF1F /* ErrorLogger.swift in Sources */,
 				28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */,
