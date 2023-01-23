@@ -7,99 +7,19 @@
 
 import Foundation
 
-/*struct TestCategoriesList: Decodable {
-//    let testCategories: [Test]
-    let testCategories: [String: [Test]]
-    
-    private enum CodingKeys: String, CodingKey {
-        case data
-    }
-    
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        testCategories = try container.decode([Test].self, forKey: CodingKeys.data)
-//        print("> TestCategoriesList - testCategories: \(testCategories)")
-//    }
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        testCategories = try container.decode([String: [Test]].self, forKey: CodingKeys.data)
-        print("> TestCategoriesList - testCategories: \(testCategories)")
-    }
-}
-
-//struct TestCategory: Decodable {
-//    let tests: [Test]
-//}
-
-struct Test: Decodable, Identifiable {
-    let id: Int
-    let text: String
-    
-    private enum ContainerKeys: String, CodingKey {
-        case data
-    }
-    
-    private enum DataKeys: String, CodingKey {
-        case id
-        case text
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: ContainerKeys.self)
-        let dataContainer = try container.nestedContainer(keyedBy: DataKeys.self, forKey: ContainerKeys.data)
-        id = try dataContainer.decode(Int.self, forKey: DataKeys.id)
-        text = try dataContainer.decode(String.self, forKey: DataKeys.text)
-        print("> Test - id: \(id) - text: \(text)")
-    }
-}*/
-
-//// TESTING ABOVE
-
-/*struct ArticleListResponse: Decodable {
-    let categories: [String: ArticleListData]
-    
-    private enum CodingKeys: String, CodingKey {
-        case data
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        // TODO: use json decoder to get all key and dictionary/array pairs. Then parse each separately with JsonDecoder.
-        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                // try to read out a string array
-                if let names = json["names"] as? [String] {
-                    print(names)
-                }
-            }
-        
-        // https://stackoverflow.com/questions/44603248/how-to-decode-a-property-with-type-of-json-dictionary-in-swift-45-decodable-pr
-        // https://developer.apple.com/forums/thread/100417
-        // Looks like to do it dynamically would require to also add JsonDecoder, add some extra logic to mix up with JsonSerialization. Pure JsonSerialization looks impossible.
-        
-        
-        // Do we even need to dynamically parse all the main category types? The actual categories inside elements are different. And json is complex. Maybe we don't, so let's not complicate things.
-        
-        // Just hardcode parse 5 main categories: fussball, wintersport, motorsport, sportmix, esports. Ignore adds.
-        // There are json fields with arbitrary keys, that can also hold array (activities) or dictionary (adds). To perfectly dynamically handle it would change simple elegant code into something much more complicated and not standard. Would require deeper research to say more, but it's not straightforward to say the least.
-        // I only have this json response, I don't know with which purpose it was designed that way. Don't know if these categories are higly dynamic, or are actually just hardcoded on BE side. The actual category dictionary is inside each single activity entry anyway. So I don't understand why these 5 categories fussball, wintersport, motorsport, sportmix, esports are needed at all.
-        // To dynamically parse them requires too much extra code, and without a good purpose is not something I'd do. There is no such purpose for this task, as I have only 1 static json. So I will do it in the most simple and clean way. But I can justify what I'd do if more was required.
-        
-        let articleCategories = try container.decode([String: ArticleListData].self, forKey: CodingKeys.data)
-        categories = articleCategories
-        print("> ArticleCategoriesList - articles: \(articleCategories)")
-    }
-}*/
-
 struct ArticleListResponse {
-    let categories: [ArticleListCategory]
+    let sections: [ArticleListSection]
 }
 
-struct ArticleListCategory {
-    let name: String
-    let articles: [Article]
+struct ArticleListSection {
+    let data: Data
     
-    // TODO: add enum, rename, so also has adds
+    enum Data {
+        /// Parameters: name, array of articles
+        case articlesCategory(String, [Article])
+        /// Parameters: add
+        case add(Add)
+    }
 }
 
 struct Article: Decodable, Identifiable {
@@ -107,13 +27,14 @@ struct Article: Decodable, Identifiable {
     let title: String
     let text: String
     let category: Category
-    let date: Date
+    let date: Date?
     let image: Image
     let url: String
     let type: String
     
     var displayDate: String {
-        date.toString(DateFormats.display)
+        guard let dateValue = date else { return "" }
+        return dateValue.toString(DateFormats.display)
     }
     
     struct Category: Decodable, Identifiable {
@@ -153,27 +74,28 @@ struct Article: Decodable, Identifiable {
         text = try dataContainer.decode(String.self, forKey: DataKeys.text)
         category = try dataContainer.decode(Category.self, forKey: DataKeys.category)
         let dateStr = try dataContainer.decode(String.self, forKey: DataKeys.date)
-        // TODO: handle if failed to format?
-        date = dateStr.toDate(DateFormats.full)!
+        // TODO: better way to handle than just make optional?
+        date = dateStr.toDate(DateFormats.full)
         image = try dataContainer.decode(Image.self, forKey: DataKeys.image)
         url = try dataContainer.decode(String.self, forKey: DataKeys.url)
         print("> Article - id: \(id) - title: \(title) - text: \(text)")
     }
 }
 
-//struct Add: Decodable {
-//    let value: [String: Data]
-//
-//    struct Value: Decodable {
-//        let type: String
-//        let data: Data
-//    }
-//
-//    struct Data: Decodable {
-//        let id: Int
-//        let sticky: Bool
-//    }
-//}
+// TODO: decoding, remove initial values
+struct Add: Decodable {
+    let value: [String: Data] = [String: Data]()
+
+    struct Value: Decodable {
+        let type: String = ""
+        let data: Data = Data()
+    }
+
+    struct Data: Decodable {
+        let id: Int = 0
+        let sticky: Bool = false
+    }
+}
 
 /*
  {

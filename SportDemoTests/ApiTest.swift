@@ -14,16 +14,8 @@ final class ApiTest: XCTestCase {
     func testDecodeData() throws {
         Task {
             do {
-                /*let articles = try await mockApiClient.loadArticlesList()
-                print("articles: \(articles)")
-                guard let articleCategories = articles.articleCategories else {
-                    XCTFail("No articles loaded.")
-                    return
-                }
-                XCTAssert(articleCategories.count == 2)*/
-                let test = try await mockApiClient.loadTest()
-                print("=> test: \(test)")
-                XCTAssert(test.testCategories.count == 2)
+                let result = try await mockApiClient.loadArticlesList()
+                XCTAssert(result.sections.count == 6)
             }
             catch let error as SDError  {
 //                Task.detached { @MainActor in
