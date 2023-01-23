@@ -18,7 +18,7 @@ struct ArticleListSection {
         /// Parameters: name, array of articles
         case articlesCategory(String, [Article])
         /// Parameters: add
-        case add(Add)
+        case add(AddSection)
     }
 }
 
@@ -82,18 +82,22 @@ struct Article: Decodable, Identifiable {
     }
 }
 
-// TODO: decoding, remove initial values
-struct Add: Decodable {
-    let value: [String: Data] = [String: Data]()
+struct AddSection {
+    let adds: [Add]
+    
+    struct Add: Decodable {
+        let name: String
+        let content: Content
+        
+        struct Content: Decodable {
+            let type: String
+            let data: Data
 
-    struct Value: Decodable {
-        let type: String = ""
-        let data: Data = Data()
-    }
-
-    struct Data: Decodable {
-        let id: Int = 0
-        let sticky: Bool = false
+            struct Data: Decodable {
+                let id: Int
+                let sticky: Bool
+            }
+        }
     }
 }
 

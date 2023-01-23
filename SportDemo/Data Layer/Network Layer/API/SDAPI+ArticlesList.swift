@@ -62,7 +62,27 @@ extension SDAPI {
     }
     
     private func processJsonDictionary(name: String, dictionary: [String: Any]) throws -> ArticleListSection {
-        // TODO: parse for add if we want
-        return ArticleListSection(data: .add(Add()))
+        var adds = [AddSection.Add]()
+        try dictionary.forEach { (key: String, value: Any) in
+            if let dictionary = value as? [String: Any] {
+                let dictionaryJsonData = try JSONSerialization.data(
+                    withJSONObject: dictionary,
+                    options: [])
+                let result: AddSection.Add.Content = try decodeApiResponse(data: dictionaryJsonData)
+                let add = AddSection.Add(name: key, content: result)
+                adds.append(add)
+            }
+        }
+        return ArticleListSection(data: .add(AddSection(adds: adds)))
     }
 }
+
+/*
+ value:
+ {
+                 "type": "ad_banner",
+                 "data": {
+                     "id": 3366048,
+                     "sticky": false
+                 }
+ */
