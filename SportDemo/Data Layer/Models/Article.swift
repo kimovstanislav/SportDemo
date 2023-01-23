@@ -54,9 +54,9 @@ struct Test: Decodable, Identifiable {
 }*/
 
 //// TESTING ABOVE
-///
-struct ArticleCategoriesList: Decodable {
-    let articleCategories: [String: [Article]]
+
+/*struct ArticleListResponse: Decodable {
+    let categories: [String: ArticleListData]
     
     private enum CodingKeys: String, CodingKey {
         case data
@@ -64,9 +64,42 @@ struct ArticleCategoriesList: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        articleCategories = try container.decode([String: [Article]].self, forKey: CodingKeys.data)
+        
+        // TODO: use json decoder to get all key and dictionary/array pairs. Then parse each separately with JsonDecoder.
+        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                // try to read out a string array
+                if let names = json["names"] as? [String] {
+                    print(names)
+                }
+            }
+        
+        // https://stackoverflow.com/questions/44603248/how-to-decode-a-property-with-type-of-json-dictionary-in-swift-45-decodable-pr
+        // https://developer.apple.com/forums/thread/100417
+        // Looks like to do it dynamically would require to also add JsonDecoder, add some extra logic to mix up with JsonSerialization. Pure JsonSerialization looks impossible.
+        
+        
+        // Do we even need to dynamically parse all the main category types? The actual categories inside elements are different. And json is complex. Maybe we don't, so let's not complicate things.
+        
+        // Just hardcode parse 5 main categories: fussball, wintersport, motorsport, sportmix, esports. Ignore adds.
+        // There are json fields with arbitrary keys, that can also hold array (activities) or dictionary (adds). To perfectly dynamically handle it would change simple elegant code into something much more complicated and not standard. Would require deeper research to say more, but it's not straightforward to say the least.
+        // I only have this json response, I don't know with which purpose it was designed that way. Don't know if these categories are higly dynamic, or are actually just hardcoded on BE side. The actual category dictionary is inside each single activity entry anyway. So I don't understand why these 5 categories fussball, wintersport, motorsport, sportmix, esports are needed at all.
+        // To dynamically parse them requires too much extra code, and without a good purpose is not something I'd do. There is no such purpose for this task, as I have only 1 static json. So I will do it in the most simple and clean way. But I can justify what I'd do if more was required.
+        
+        let articleCategories = try container.decode([String: ArticleListData].self, forKey: CodingKeys.data)
+        categories = articleCategories
         print("> ArticleCategoriesList - articles: \(articleCategories)")
     }
+}*/
+
+struct ArticleListResponse {
+    let categories: [ArticleListCategory]
+}
+
+struct ArticleListCategory {
+    let name: String
+    let articles: [Article]
+    
+    // TODO: add enum, rename, so also has adds
 }
 
 struct Article: Decodable, Identifiable {
@@ -77,6 +110,7 @@ struct Article: Decodable, Identifiable {
     let date: Date
     let image: Image
     let url: String
+    let type: String
     
     var displayDate: String {
         date.toString(DateFormats.display)
@@ -98,8 +132,8 @@ struct Article: Decodable, Identifiable {
     
     private enum ContainerKeys: String, CodingKey {
         case data
+        case type
     }
-    
     private enum DataKeys: String, CodingKey {
         case id
         case title
@@ -112,6 +146,7 @@ struct Article: Decodable, Identifiable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ContainerKeys.self)
+        type = try container.decode(String.self, forKey: ContainerKeys.type)
         let dataContainer = try container.nestedContainer(keyedBy: DataKeys.self, forKey: ContainerKeys.data)
         id = try dataContainer.decode(Int.self, forKey: DataKeys.id)
         title = try dataContainer.decode(String.self, forKey: DataKeys.title)
@@ -126,70 +161,19 @@ struct Article: Decodable, Identifiable {
     }
 }
 
-/*struct ArticleCategoriesList: Decodable {
-    let articleCategories: [ArticleCategory]?
-    
-    private enum CodingKeys: String, CodingKey {
-        case data
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let articlesResponse: [String: ArticleCategoryResponse] = try? container.decode([String: ArticleCategoryResponse].self, forKey: .data) {
-            var resultArticleCategories = [ArticleCategory]()
-            articlesResponse.forEach { (key: String, value: ArticleCategoryResponse) in
-                resultArticleCategories.append(ArticleCategory(categoryName: key, articles: value.articles))
-            }
-            articleCategories = resultArticleCategories
-        } else {
-            articleCategories = nil
-        }
-    }
-}
-
-struct ArticleCategory {
-    // TODO: would be better to add an actual category here. But feels a bit messy from parsing perspective.
-    let categoryName: String
-    let articles: [Article]
-}
-
-struct ArticleCategoryResponse: Decodable {
-    let articles: [Article]
-    
-    private enum CodingKeys: String, CodingKey {
-        case data
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        articles = try container.decode([Article].self, forKey: .data)
-        print("> ArticleCategoryResponse - articles: \(articles)")
-    }
-}
-
-struct Article: Decodable, Identifiable {
-    let id: Int
-    let title: String
-    let text: String
-    let category: Category
-    let date: Date
-    let image: Image
-    let url: String
-    
-    struct Category: Decodable, Identifiable {
-        let id: Int
-        let filterId: Int
-        let filterTitle: String
-        let title: String
-        let icon: String
-    }
-    
-    struct Image: Decodable {
-        let small: String
-        let medium: String
-        let large: String
-    }
-}*/
+//struct Add: Decodable {
+//    let value: [String: Data]
+//
+//    struct Value: Decodable {
+//        let type: String
+//        let data: Data
+//    }
+//
+//    struct Data: Decodable {
+//        let id: Int
+//        let sticky: Bool
+//    }
+//}
 
 /*
  {
@@ -264,4 +248,15 @@ struct Article: Decodable, Identifiable {
                  "app": "https:\/\/www.laola1.at\/de\/red\/motorsport\/formel-1\/news\/formel-1-neuling-nyck-de-vries-muss-vor-gericht\/?app"
              }
          }
+ */
+
+/*
+ "add": {
+             "1": {
+                 "type": "ad_banner",
+                 "data": {
+                     "id": 3366048,
+                     "sticky": false
+                 }
+             },
  */
