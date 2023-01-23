@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TestCategoriesList: Decodable {
+/*struct TestCategoriesList: Decodable {
 //    let testCategories: [Test]
     let testCategories: [String: [Test]]
     
@@ -51,11 +51,82 @@ struct Test: Decodable, Identifiable {
         text = try dataContainer.decode(String.self, forKey: DataKeys.text)
         print("> Test - id: \(id) - text: \(text)")
     }
-}
+}*/
 
 //// TESTING ABOVE
-
+///
 struct ArticleCategoriesList: Decodable {
+    let articleCategories: [String: [Article]]
+    
+    private enum CodingKeys: String, CodingKey {
+        case data
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        articleCategories = try container.decode([String: [Article]].self, forKey: CodingKeys.data)
+        print("> ArticleCategoriesList - articles: \(articleCategories)")
+    }
+}
+
+struct Article: Decodable, Identifiable {
+    let id: Int
+    let title: String
+    let text: String
+    let category: Category
+    let date: Date
+    let image: Image
+    let url: String
+    
+    var displayDate: String {
+        date.toString(DateFormats.display)
+    }
+    
+    struct Category: Decodable, Identifiable {
+        let id: Int
+        let filterId: Int
+        let filterTitle: String
+        let title: String
+        let icon: String
+    }
+    
+    struct Image: Decodable {
+        let small: String
+        let medium: String
+        let large: String
+    }
+    
+    private enum ContainerKeys: String, CodingKey {
+        case data
+    }
+    
+    private enum DataKeys: String, CodingKey {
+        case id
+        case title
+        case text
+        case category
+        case date
+        case image
+        case url
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ContainerKeys.self)
+        let dataContainer = try container.nestedContainer(keyedBy: DataKeys.self, forKey: ContainerKeys.data)
+        id = try dataContainer.decode(Int.self, forKey: DataKeys.id)
+        title = try dataContainer.decode(String.self, forKey: DataKeys.title)
+        text = try dataContainer.decode(String.self, forKey: DataKeys.text)
+        category = try dataContainer.decode(Category.self, forKey: DataKeys.category)
+        let dateStr = try dataContainer.decode(String.self, forKey: DataKeys.date)
+        // TODO: handle if failed to format?
+        date = dateStr.toDate(DateFormats.full)!
+        image = try dataContainer.decode(Image.self, forKey: DataKeys.image)
+        url = try dataContainer.decode(String.self, forKey: DataKeys.url)
+        print("> Article - id: \(id) - title: \(title) - text: \(text)")
+    }
+}
+
+/*struct ArticleCategoriesList: Decodable {
     let articleCategories: [ArticleCategory]?
     
     private enum CodingKeys: String, CodingKey {
@@ -118,7 +189,7 @@ struct Article: Decodable, Identifiable {
         let medium: String
         let large: String
     }
-}
+}*/
 
 /*
  {

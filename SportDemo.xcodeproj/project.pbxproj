@@ -18,6 +18,7 @@
 		28B78CAB297DBE98009ACF1F /* ApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CAA297DBE98009ACF1F /* ApiTest.swift */; };
 		28B78CB0297DD268009ACF1F /* ArticlesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CAF297DD268009ACF1F /* ArticlesListViewModel.swift */; };
 		28B78CB1297DD413009ACF1F /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 28B78CAC297DC839009ACF1F /* test.json */; };
+		28B78CB3297DF659009ACF1F /* DateFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CB2297DF659009ACF1F /* DateFormats.swift */; };
 		28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */; };
 		28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */; };
 		28DAB4DE297AE8E3007B75BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DAB4DD297AE8E3007B75BA /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		28B78CAA297DBE98009ACF1F /* ApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTest.swift; sourceTree = "<group>"; };
 		28B78CAC297DC839009ACF1F /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		28B78CAF297DD268009ACF1F /* ArticlesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListViewModel.swift; sourceTree = "<group>"; };
+		28B78CB2297DF659009ACF1F /* DateFormats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormats.swift; sourceTree = "<group>"; };
 		28DAB4D6297AE8E2007B75BA /* SportDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDemoApp.swift; sourceTree = "<group>"; };
 		28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				287AC075297DA13D0003A0B7 /* SDStrings.swift */,
 				28B78CA5297DBBED009ACF1F /* JsonHelper.swift */,
+				28B78CB2297DF659009ACF1F /* DateFormats.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */,
 				287AC078297DA1FC0003A0B7 /* SDError+API.swift in Sources */,
 				28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */,
+				28B78CB3297DF659009ACF1F /* DateFormats.swift in Sources */,
 				287AC069297D89970003A0B7 /* Article.swift in Sources */,
 				287AC073297DA0F30003A0B7 /* SDError.swift in Sources */,
 				287AC06E297D8AE50003A0B7 /* SDAPI.swift in Sources */,

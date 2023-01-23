@@ -11,10 +11,18 @@ class ArticlesListViewModel: ObservableObject {
     init() {
         print(">>>!!!!! HALLO!!!!!<<<<<")
         Task {
+//            do {
+//                let mockApiClient = MockAPIClient()
+//                let test = try await mockApiClient.loadTest()
+//                print("=> test: \(test)")
+//            }
+//            catch let error as SDError  {
+//                print("> error: \(error)")
+//            }
             do {
                 let mockApiClient = MockAPIClient()
-                let test = try await mockApiClient.loadTest()
-                print("=> test: \(test)")
+                let articles = try await mockApiClient.loadArticlesList()
+                print("=> articles: \(articles)")
             }
             catch let error as SDError  {
                 print("> error: \(error)")
