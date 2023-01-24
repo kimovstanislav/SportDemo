@@ -14,7 +14,6 @@ struct SelectArticleCategoryView : View {
     // Using a closure for a callback here to make it fast and simple.
     var selectedCategory: ((_ category: Article.Category?) -> ())
     
-    // TODO: try to do it better maybe with Combine, or SwiftUI16 selected (if would work)
     init(categories: [Article.Category], selectedCategory: @escaping ((_ category: Article.Category?) -> ())) {
         self.categories = categories
         self.selectedCategory = selectedCategory

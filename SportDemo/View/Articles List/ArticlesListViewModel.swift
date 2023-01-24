@@ -134,7 +134,6 @@ extension ArticlesListViewModel {
     }
     
     func handleEvent(_ event: Event) {
-        print("> handle event: \(event)")
         switch event {
         /// UI lifecycle
         case .onAppear:
