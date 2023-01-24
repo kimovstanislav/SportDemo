@@ -17,5 +17,6 @@ struct ArticleDetailView: View {
     
     var body: some View {
         SwiftUIWebView(url: url)
+            .accessibility(identifier: AccessibilityIdentifiers.ArticleDetail.webView)
     }
 }

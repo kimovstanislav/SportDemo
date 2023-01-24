@@ -14,6 +14,6 @@ enum AccessibilityIdentifiers {
     }
     
     enum ArticleDetail {
-        static let title = "article_detail_title"
+        static let webView = "article_detail_webview"
     }
 }

@@ -42,6 +42,7 @@
 		28DAB4EC297AE8E4007B75BA /* SportDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4EB297AE8E4007B75BA /* SportDemoTests.swift */; };
 		28DAB4F6297AE8E4007B75BA /* SportDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4F5297AE8E4007B75BA /* SportDemoUITests.swift */; };
 		28DAB4F8297AE8E4007B75BA /* SportDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4F7297AE8E4007B75BA /* SportDemoUITestsLaunchTests.swift */; };
+		28FC20CC298034050014FD8B /* AcessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -532,6 +533,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28FC20CC298034050014FD8B /* AcessibilityIdentifiers.swift in Sources */,
 				28DAB4F8297AE8E4007B75BA /* SportDemoUITestsLaunchTests.swift in Sources */,
 				28DAB4F6297AE8E4007B75BA /* SportDemoUITests.swift in Sources */,
 			);

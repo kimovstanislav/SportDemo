@@ -38,4 +38,21 @@ final class SportDemoUITests: XCTestCase {
             }
         }
     }
+    
+    
+    func testArticlesListLoad() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        XCTAssertTrue(app.collectionViews[AccessibilityIdentifiers.ArticlesList.list].waitForExistence(timeout: 10))
+    }
+    
+    func testOpenArticleDetail() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        app.collectionViews[AccessibilityIdentifiers.ArticlesList.list].buttons[String(format: AccessibilityIdentifiers.ArticlesList.listCellFormat, 0)].tap()
+
+        XCTAssertTrue(app.webViews[AccessibilityIdentifiers.ArticleDetail.webView].waitForExistence(timeout: 10))
+    }
 }
