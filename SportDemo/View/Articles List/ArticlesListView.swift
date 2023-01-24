@@ -7,8 +7,14 @@
 
 import SwiftUI
 
+// TODO: create a screen to select from category.
+// TODO: present select category screen modally with a callback on selection.
+// TODO: get list of categories from
+// Perfectly I'd want to use the new NavigationStack and also a Coordinator pattern for app-wide programmatic navigation. But NavigationStack is new to me and I'd need some research first. Not in the scope of this small demo task.
 struct ArticlesListView: View {
     @ObservedObject var viewModel:  ArticlesListViewModel
+    
+    @State private var showFilterCategorySheet = false
     
     var body: some View {
         NavigationView {
@@ -29,6 +35,9 @@ struct ArticlesListView: View {
         .alert(isPresented: $viewModel.alertModel.showAlert, content: { () -> Alert in
             Alert(title: Text(viewModel.alertModel.title), message: Text(viewModel.alertModel.message), dismissButton: .default(Text(SDStrings.Button.close)))
         })
+        .sheet(isPresented: $showFilterCategorySheet) {
+            SelectArticleCategoryView()
+       }
     }
     
     
@@ -49,6 +58,7 @@ struct ArticlesListView: View {
     // MARK: - Articles list
     
     private func articlesListView(articles: [Article]) -> some View {
+        // TODO: check for list cell ids
         List(articles.indices, id: \.self) { index in
             NavigationLink(destination: ArticleDetailView(url: URL(string: articles[index].url)!)) {
                 articleCell(article: articles[index])
@@ -57,6 +67,11 @@ struct ArticlesListView: View {
         }
         .listStyle(PlainListStyle())
         .navigationTitle("News")
+        .toolbar {
+            Button("Filter") {
+                showFilterCategorySheet = true
+            }
+        }
         .accessibility(identifier: AccessibilityIdentifiers.ArticlesList.list)
     }
     

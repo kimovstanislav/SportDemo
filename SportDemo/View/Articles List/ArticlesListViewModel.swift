@@ -12,6 +12,12 @@ class ArticlesListViewModel: BaseViewModel {
     
     @Published var viewState: ViewState = .loading
     
+    var allArticles: [Article] = [Article]()
+    // We store categories, not to recalculate this array every time it's requested.
+    var allCategories: [Article.Category] = [Article.Category]()
+    // Filter category is stored to remember the last filter, when going back to filter screen.
+    var filterCategory: Article.Category? = nil
+    
     init(apiClient: SDAPI) {
         self.apiClient = apiClient
         super.init()
@@ -60,13 +66,16 @@ extension ArticlesListViewModel {
 
 extension ArticlesListViewModel {
     private func handleGetApiArticlesSuccess(_ sections: [ArticleListSection]) {
-        let articles = allArticlesFromSections(sections)
-        let sortedArticles = articles.sorted { article1, article2 in
+        let loadedArticles = allArticlesFromSections(sections)
+        let sortedArticles = loadedArticles.sorted { article1, article2 in
             guard let date1 = article1.date else { return false }
             guard let date2 = article2.date else { return true }
             return date1 > date2
         }
-        updateArticlesList(sortedArticles)
+        allArticles = sortedArticles
+        allCategories = getAllCategories()
+        filterArticlesForCategory(nil)
+        updateDisplayedArticles()
     }
     
     private func handleGetApiArticlesFailure(_ error: SDError) {
@@ -88,7 +97,27 @@ extension ArticlesListViewModel {
         }
         return articles.flatMap { $0 }
     }
+    
+    private func getAllCategories() -> [Article.Category] {
+        allArticles.map { $0.category }.unique
+    }
         
+    
+    // MARK: - Filter articles
+    
+    private func filterArticlesForCategory(_ category: Article.Category?) {
+        filterCategory = category
+        updateDisplayedArticles()
+    }
+    
+    private func updateDisplayedArticles() {
+        updateArticlesList(getFilteredArticles())
+    }
+    
+    private func getFilteredArticles() -> [Article] {
+        guard let filter = filterCategory else { return allArticles }
+        return allArticles.filter { $0.category.filterId == filter.filterId }
+    }
 }
 
 

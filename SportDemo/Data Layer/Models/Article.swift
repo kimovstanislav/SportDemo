@@ -37,12 +37,16 @@ struct Article: Decodable, Identifiable, Equatable {
         return dateValue.toString(DateFormats.display)
     }
     
-    struct Category: Decodable, Identifiable {
+    struct Category: Decodable, Identifiable, Equatable {
         let id: Int
         let filterId: Int
         let filterTitle: String
         let title: String
         let icon: String
+        
+        static func == (lhs: Category, rhs: Category) -> Bool {
+            lhs.id == rhs.id
+        }
     }
     
     struct Image: Decodable {

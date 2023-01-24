@@ -30,6 +30,8 @@
 		28B78CCB297F30C4009ACF1F /* AcessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */; };
 		28B78CCE297F40AD009ACF1F /* SwiftUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCD297F40AD009ACF1F /* SwiftUIWebView.swift */; };
 		28B78CD0297F4342009ACF1F /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CCF297F4342009ACF1F /* ArticleDetailView.swift */; };
+		28B78CD3297FE299009ACF1F /* SelectArticleCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CD2297FE299009ACF1F /* SelectArticleCategoryView.swift */; };
+		28B78CD6297FF525009ACF1F /* Array+Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B78CD5297FF525009ACF1F /* Array+Unique.swift */; };
 		28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */; };
 		28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */; };
 		28DAB4DE297AE8E3007B75BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DAB4DD297AE8E3007B75BA /* Assets.xcassets */; };
@@ -80,6 +82,8 @@
 		28B78CCA297F30C4009ACF1F /* AcessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		28B78CCD297F40AD009ACF1F /* SwiftUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIWebView.swift; sourceTree = "<group>"; };
 		28B78CCF297F4342009ACF1F /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
+		28B78CD2297FE299009ACF1F /* SelectArticleCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectArticleCategoryView.swift; sourceTree = "<group>"; };
+		28B78CD5297FF525009ACF1F /* Array+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Unique.swift"; sourceTree = "<group>"; };
 		28DAB4D6297AE8E2007B75BA /* SportDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DAB4D9297AE8E2007B75BA /* SportDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDemoApp.swift; sourceTree = "<group>"; };
 		28DAB4DB297AE8E2007B75BA /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 				28B78CC3297F1449009ACF1F /* General */,
 				28B78CC0297F1342009ACF1F /* Articles List */,
 				28B78CCC297F4095009ACF1F /* Article Detail */,
+				28B78CD1297FE22E009ACF1F /* Select Article Category */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -248,6 +253,22 @@
 			path = "Article Detail";
 			sourceTree = "<group>";
 		};
+		28B78CD1297FE22E009ACF1F /* Select Article Category */ = {
+			isa = PBXGroup;
+			children = (
+				28B78CD2297FE299009ACF1F /* SelectArticleCategoryView.swift */,
+			);
+			path = "Select Article Category";
+			sourceTree = "<group>";
+		};
+		28B78CD4297FF50F009ACF1F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				28B78CD5297FF525009ACF1F /* Array+Unique.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		28DAB4CD297AE8E2007B75BA = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +300,7 @@
 				287AC067297D88EE0003A0B7 /* Data Layer */,
 				287AC071297DA0A60003A0B7 /* Error Handling */,
 				28B78CBD297EF64D009ACF1F /* Definitions */,
+				28B78CD4297FF50F009ACF1F /* Extensions */,
 				287AC074297DA1310003A0B7 /* Utility */,
 			);
 			path = SportDemo;
@@ -448,12 +470,14 @@
 				287AC076297DA13D0003A0B7 /* SDStrings.swift in Sources */,
 				28B78CA4297DBB53009ACF1F /* MockAPIClient.swift in Sources */,
 				28B78CB0297DD268009ACF1F /* ArticlesListViewModel.swift in Sources */,
+				28B78CD3297FE299009ACF1F /* SelectArticleCategoryView.swift in Sources */,
 				28B78CB5297ED83F009ACF1F /* UnexpectedCodePath.swift in Sources */,
 				28DAB4DC297AE8E2007B75BA /* ArticlesListView.swift in Sources */,
 				28B78CCB297F30C4009ACF1F /* AcessibilityIdentifiers.swift in Sources */,
 				287AC078297DA1FC0003A0B7 /* SDError+API.swift in Sources */,
 				28B78CCE297F40AD009ACF1F /* SwiftUIWebView.swift in Sources */,
 				28B78CC9297F1491009ACF1F /* ErrorLogger.swift in Sources */,
+				28B78CD6297FF525009ACF1F /* Array+Unique.swift in Sources */,
 				28DAB4DA297AE8E2007B75BA /* SportDemoApp.swift in Sources */,
 				28B78CBC297EF5FF009ACF1F /* APIClient+ErrorMapping.swift in Sources */,
 				28B78CB3297DF659009ACF1F /* DateFormats.swift in Sources */,
