@@ -15,7 +15,8 @@ class ArticlesListViewModel: BaseViewModel {
     var allArticles: [Article] = [Article]()
     // We store categories, not to recalculate this array every time it's requested.
     var allCategories: [Article.Category] = [Article.Category]()
-    // Filter category is stored to remember the last filter, when going back to filter screen.
+    // Filter category is stored to remember the last filter, to be used when going back to filter screen.
+    // But it's not used in that screen now in current simple implementation.
     var filterCategory: Article.Category? = nil
     
     init(apiClient: SDAPI) {
@@ -116,7 +117,8 @@ extension ArticlesListViewModel {
     
     private func getFilteredArticles() -> [Article] {
         guard let filter = filterCategory else { return allArticles }
-        return allArticles.filter { $0.category.filterId == filter.filterId }
+        // Filtering by id, not filterId. Don't completely understand the Category logic, but I see different sports can be under the same filterId and filterTitle. For simplicity don't go deeper into it.
+        return allArticles.filter { $0.category.id == filter.id }
     }
 }
 
@@ -140,20 +142,27 @@ extension ArticlesListViewModel {
         /// Load API
         case onApiArticlesLoaded([ArticleListSection])
         case onFailedToLoadApiArticles(SDError)
+        
+        /// Filter articles by category
+        case onFilterArticlesByCategory(Article.Category?)
     }
     
     func handleEvent(_ event: Event) {
         switch event {
-            /// UI lifecycle
+        /// UI lifecycle
         case .onAppear:
             loadArticlesFromServer()
             
-            /// Load API
+        /// Load API
         case let .onApiArticlesLoaded(articles):
             handleGetApiArticlesSuccess(articles)
             
         case let .onFailedToLoadApiArticles(error):
             handleGetApiArticlesFailure(error)
+            
+        /// Filter articles by category
+        case let .onFilterArticlesByCategory(category):
+            filterArticlesForCategory(category)
         }
     }
 }

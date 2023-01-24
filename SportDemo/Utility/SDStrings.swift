@@ -27,5 +27,17 @@ enum SDStrings {
     
     enum Button {
         static let close = "Close"
+        static let filter = "Filter"
+    }
+    
+    enum Screen {
+        enum ArticlesList {
+            static let title = "News"
+            static let noArticles = "No articles"
+        }
+        
+        enum ArticlesCategoryFilter {
+            static let noFilter = "Disable filter. Show all."
+        }
     }
 }

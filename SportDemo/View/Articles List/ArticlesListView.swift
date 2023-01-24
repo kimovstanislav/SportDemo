@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-// TODO: create a screen to select from category.
-// TODO: present select category screen modally with a callback on selection.
-// TODO: get list of categories from
-// Perfectly I'd want to use the new NavigationStack and also a Coordinator pattern for app-wide programmatic navigation. But NavigationStack is new to me and I'd need some research first. Not in the scope of this small demo task.
+// Until now I had UIKit as a base in a project with a Coordinator using a UINavigationController. With a mix of UIKit ViewControllers and SwiftUI Views wrapped in a hosting controller.
+// Here, perfectly I'd want to use the new NavigationStack and also a Coordinator pattern for app-wide programmatic navigation. But NavigationStack is new to me and I'd need some research first. Not in the scope of this small demo task.
 struct ArticlesListView: View {
     @ObservedObject var viewModel:  ArticlesListViewModel
     
@@ -36,7 +34,11 @@ struct ArticlesListView: View {
             Alert(title: Text(viewModel.alertModel.title), message: Text(viewModel.alertModel.message), dismissButton: .default(Text(SDStrings.Button.close)))
         })
         .sheet(isPresented: $showFilterCategorySheet) {
-            SelectArticleCategoryView()
+            SelectArticleCategoryView(
+                categories: viewModel.allCategories,
+                selectedCategory: { (selectedCategory: Article.Category?) -> () in
+                    viewModel.handleEvent(.onFilterArticlesByCategory(selectedCategory))
+            })
        }
     }
     
@@ -51,14 +53,14 @@ struct ArticlesListView: View {
     // MARK: - Empty list
     
     private func emptyListView() -> some View {
-        Text("No articles")
+        Text(SDStrings.Screen.ArticlesList.noArticles)
     }
     
     
     // MARK: - Articles list
     
     private func articlesListView(articles: [Article]) -> some View {
-        // TODO: check for list cell ids
+        // Need index for accesibility ids for UI tests.
         List(articles.indices, id: \.self) { index in
             NavigationLink(destination: ArticleDetailView(url: URL(string: articles[index].url)!)) {
                 articleCell(article: articles[index])
@@ -66,9 +68,9 @@ struct ArticlesListView: View {
             .accessibility(identifier: String(format: AccessibilityIdentifiers.ArticlesList.listCellFormat, index))
         }
         .listStyle(PlainListStyle())
-        .navigationTitle("News")
+        .navigationTitle(SDStrings.Screen.ArticlesList.title)
         .toolbar {
-            Button("Filter") {
+            Button(SDStrings.Button.filter) {
                 showFilterCategorySheet = true
             }
         }
@@ -121,6 +123,6 @@ struct ArticlesListView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticlesListView(viewModel: ViewModelFactory.shared.makeArticlesListViewModel())
+        ArticlesListView(viewModel: ViewModelFactory.shared.makeDummyArticlesListViewModel())
     }
 }
