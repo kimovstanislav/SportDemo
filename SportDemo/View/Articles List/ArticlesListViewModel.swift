@@ -53,7 +53,7 @@ extension ArticlesListViewModel {
         Task { [weak self] in
             do {
                 let response = try await apiClient.loadArticlesList()
-                self?.handleEvent(.onApiArticlesLoaded(response.sections))
+                self?.handleEvent(.onApiArticlesLoaded(response))
             }
             catch let error as SDError  {
                 self?.handleEvent(.onFailedToLoadApiArticles(error))
@@ -66,8 +66,8 @@ extension ArticlesListViewModel {
 // MARK: - Handle API response
 
 extension ArticlesListViewModel {
-    private func handleGetApiArticlesSuccess(_ sections: [ArticleListSection]) {
-        let loadedArticles = allArticlesFromSections(sections)
+    private func handleGetApiArticlesSuccess(_ result: ArticleListResponse) {
+        let loadedArticles = result.getAllAricles()
         let sortedArticles = loadedArticles.sorted { article1, article2 in
             guard let date1 = article1.date else { return false }
             guard let date2 = article2.date else { return true }
@@ -84,18 +84,6 @@ extension ArticlesListViewModel {
         }
         // And display an alert for the API error.
         self.processError(error)
-    }
-    
-    private func allArticlesFromSections(_ sections: [ArticleListSection]) -> [Article] {
-        let articles = sections.compactMap { section in
-            switch section.data {
-            case .articlesCategory(_, let articles):
-                return articles
-            default:
-                return nil
-            }
-        }
-        return articles.flatMap { $0 }
     }
     
     private func getAllCategories() -> [Article.Category] {
@@ -138,7 +126,7 @@ extension ArticlesListViewModel {
         case onAppear
         
         /// Load API
-        case onApiArticlesLoaded([ArticleListSection])
+        case onApiArticlesLoaded(ArticleListResponse)
         case onFailedToLoadApiArticles(SDError)
         
         /// Filter articles by category
@@ -146,15 +134,15 @@ extension ArticlesListViewModel {
     }
     
     func handleEvent(_ event: Event) {
+        print("> handle event: \(event)")
         switch event {
         /// UI lifecycle
         case .onAppear:
-            showLoading()
             loadArticlesFromServer()
             
         /// Load API
-        case let .onApiArticlesLoaded(articles):
-            handleGetApiArticlesSuccess(articles)
+        case let .onApiArticlesLoaded(result):
+            handleGetApiArticlesSuccess(result)
             
         case let .onFailedToLoadApiArticles(error):
             handleGetApiArticlesFailure(error)

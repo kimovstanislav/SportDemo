@@ -106,3 +106,18 @@ struct AddSection {
         }
     }
 }
+
+
+extension ArticleListResponse {
+    func getAllAricles() -> [Article] {
+        let articles = sections.compactMap { section in
+            switch section.data {
+            case .articlesCategory(_, let articles):
+                return articles
+            default:
+                return nil
+            }
+        }
+        return articles.flatMap { $0 }
+    }
+}
