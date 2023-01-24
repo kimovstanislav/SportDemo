@@ -76,7 +76,6 @@ extension ArticlesListViewModel {
         allArticles = sortedArticles
         allCategories = getAllCategories()
         filterArticlesForCategory(nil)
-        updateDisplayedArticles()
     }
     
     private func handleGetApiArticlesFailure(_ error: SDError) {
@@ -134,7 +133,6 @@ extension ArticlesListViewModel {
         case showError(errorMessage: String)
     }
     
-    // TODO: to add filter by category
     enum Event {
         /// UI lifecycle
         case onAppear
@@ -151,6 +149,7 @@ extension ArticlesListViewModel {
         switch event {
         /// UI lifecycle
         case .onAppear:
+            showLoading()
             loadArticlesFromServer()
             
         /// Load API
