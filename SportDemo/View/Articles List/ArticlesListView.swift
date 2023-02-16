@@ -37,7 +37,7 @@ struct ArticlesListView: View {
             SelectArticleCategoryView(
                 categories: viewModel.allCategories,
                 selectedCategory: { (selectedCategory: Article.Category?) -> () in
-                    viewModel.handleEvent(.onFilterArticlesByCategory(selectedCategory))
+                    viewModel.doFilterArticlesByCategory(selectedCategory)
             })
        }
     }

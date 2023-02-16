@@ -14,6 +14,6 @@ class ViewModelFactory {
     private let apiClient: SDAPI = APIClient()
     
     func makeArticlesListViewModel() -> ArticlesListViewModel {
-        return ArticlesListViewModel(apiClient: apiClient)
+        return ArticlesListViewModel(stateMachine: ArticlesListViewModel.StateMachine(state: .start), apiClient: apiClient)
     }
 }

@@ -9,6 +9,6 @@ import Foundation
 
 extension ViewModelFactory {
     func makeDummyArticlesListViewModel() -> ArticlesListViewModel {
-        return ArticlesListViewModel(apiClient: MockAPIClient())
+        return ArticlesListViewModel(stateMachine: ArticlesListViewModel.StateMachine(state: .start), apiClient: MockAPIClient())
     }
 }
