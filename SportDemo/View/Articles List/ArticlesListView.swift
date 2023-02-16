@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import Combine
 
 // Until now I had UIKit as a base in a project with a Coordinator using a UINavigationController. With a mix of UIKit ViewControllers and SwiftUI Views wrapped in a hosting controller.
 // Here, perfectly I'd want to use the new NavigationStack and also a Coordinator pattern for app-wide programmatic navigation. But NavigationStack is new to me and I'd need some research first. Not in the scope of this small demo task.
 struct ArticlesListView: View {
-    @ObservedObject var viewModel:  ArticlesListViewModel
+    @ObservedObject var viewModel: ArticlesListViewModel
     
     @State private var showFilterCategorySheet = false
+    
+//    let selectedCategory = PassthroughSubject<Article.Category?, Never>()
     
     var body: some View {
         NavigationView {
@@ -34,11 +37,14 @@ struct ArticlesListView: View {
             Alert(title: Text(viewModel.alertModel.title), message: Text(viewModel.alertModel.message), dismissButton: .default(Text(SDStrings.Button.close)))
         })
         .sheet(isPresented: $showFilterCategorySheet) {
-            SelectArticleCategoryView(
-                categories: viewModel.allCategories,
-                selectedCategory: { (selectedCategory: Article.Category?) -> () in
-                    viewModel.handleEvent(.onFilterArticlesByCategory(selectedCategory))
-            })
+//            SelectArticleCategoryView(
+//                categories: viewModel.allCategories,
+//                selectedCategory: { (selectedCategory: Article.Category?) -> () in
+//                    viewModel.handleEvent(.onFilterArticlesByCategory(selectedCategory))
+//            })
+            let view = SelectArticleCategoryView(categories: viewModel.allCategories)
+            return view
+            
        }
     }
     
