@@ -44,6 +44,7 @@ class ArticlesListViewModel: BaseViewModel {
     
 
     private func setViewState(_ state: ViewState) {
+        print("==> VM setViewState: \(state)")
         DispatchQueue.main.async {
             self.viewState = state
         }
