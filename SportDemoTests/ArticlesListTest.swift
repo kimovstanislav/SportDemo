@@ -139,6 +139,22 @@ final class ArticlesListTest: XCTestCase {
         
         waitForExpectations(timeout: 5, handler: nil)
     }
+    
+    func testStateMachine() throws {
+        let stateMachine = ArticlesListViewModel.StateMachine(state: .start)
+        
+        stateMachine.tryEvent(.loadArticles)
+        XCTAssert(stateMachine.state == .loadingArticles)
+        
+        stateMachine.tryEvent(.loadArticlesFailure)
+        XCTAssert(stateMachine.state == .error)
+        
+        stateMachine.tryEvent(.loadArticles)
+        XCTAssert(stateMachine.state == .loadingArticles)
+        
+        stateMachine.tryEvent(.loadArticlesSuccess)
+        XCTAssert(stateMachine.state == .showArticles)
+    }
 }
 
 extension ArticlesListViewModel.ViewState: Equatable {
