@@ -39,26 +39,20 @@ final class ArticlesListTest: XCTestCase {
     func testLoadArticles() throws {
         let expectation = self.expectation(description: "States")
         
-        let stateMachine = ArticlesListViewModel.StateMachine(state: .start)
-        let apiClient = MockAPIClient()
-        let viewModel = ArticlesListViewModel(stateMachine: stateMachine, apiClient: apiClient)
-        
         Task {
             do {
+                let apiClient = MockAPIClient()
                 let result = try await apiClient.loadArticlesList()
                 let toCompareArticles = result.getAllAricles()
+                let toCompareStates: [ArticlesListViewModel.ViewState] = [.none, .loading, .showArticles(articles: toCompareArticles)]
                 
-                // TODO: replace array with only 1 value
-                let toCompareStates: [ArticlesListViewModel.ViewState] = [.loading, .loading, .showArticles(articles: toCompareArticles)]
+                let stateMachine = ArticlesListViewModel.StateMachine(state: .start)
+                let viewModel = ArticlesListViewModel(stateMachine: stateMachine, apiClient: apiClient)
                 
-                // TODO: read what is @Published and @ObservableObject in Combine
-                // TODO: compare to just 1 last value
                 var step: Int = 0
                 let _ = viewModel.$viewState
                     .sink { value in
-                        print("=> value: \(value)")
                         let stateToCompare = toCompareStates[step]
-                        print("==> stateToCompare: \(stateToCompare) - step: \(step)")
                         guard stateToCompare == value else {
                             XCTFail("Wrong state")
                             return
@@ -88,20 +82,17 @@ final class ArticlesListTest: XCTestCase {
         let viewModel = ArticlesListViewModel(stateMachine: stateMachine, apiClient: apiClient)
         
         let errorMessage = SDStrings.Error.API.loadingArticlesFromServerErrorMessage
-        let toCompareStates: [ArticlesListViewModel.ViewState] = [.loading, .loading, .showError(errorMessage: errorMessage)]
+        let toCompareStates: [ArticlesListViewModel.ViewState] = [.none, .loading, .showError(errorMessage: errorMessage)]
         
         var step: Int = 0
         let _ = viewModel.$viewState
             .sink { value in
-                print("=> value: \(value)")
                 let stateToCompare = toCompareStates[step]
-                print("==> stateToCompare: \(stateToCompare) - step: \(step)")
                 guard stateToCompare == value else {
                     XCTFail("Wrong state")
                     return
                 }
                 step += 1
-                print("===> incremented step: \(step)")
                 if step == toCompareStates.count {
                     expectation.fulfill()
                 }
@@ -153,6 +144,9 @@ final class ArticlesListTest: XCTestCase {
 extension ArticlesListViewModel.ViewState: Equatable {
     public static func ==(lhs: ArticlesListViewModel.ViewState, rhs: ArticlesListViewModel.ViewState) -> Bool {
         switch (lhs, rhs) {
+        case (.none, .none):
+            return true
+            
         case (.loading, .loading):
             return true
             

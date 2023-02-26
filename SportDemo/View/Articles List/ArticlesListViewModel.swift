@@ -18,7 +18,7 @@ class ArticlesListViewModel: BaseViewModel {
     }
     private var stateCancellable: AnyCancellable?
     
-    @Published var viewState: ViewState = .loading
+    @Published var viewState: ViewState = .none
     
     var allArticles: [Article] = []
     var filteredArticles: [Article] = []
@@ -44,7 +44,6 @@ class ArticlesListViewModel: BaseViewModel {
     
 
     private func setViewState(_ state: ViewState) {
-        print("==> VM setViewState: \(state)")
         DispatchQueue.main.async {
             self.viewState = state
         }
@@ -57,7 +56,7 @@ class ArticlesListViewModel: BaseViewModel {
 extension ArticlesListViewModel {
     func doFilterArticlesByCategory(_ category: Article.Category?) {
         filterArticlesForCategory(category)
-        showArticlesList(filteredArticles)
+        updateViewState()
     }
 }
 
@@ -65,6 +64,19 @@ extension ArticlesListViewModel {
 // MARK: - View update
 
 extension ArticlesListViewModel {
+    private func updateViewState() {
+        switch state {
+        case .loadingArticles:
+            showLoading()
+        case .showArticles:
+            showArticlesList(filteredArticles)
+        case .error:
+            showError(SDStrings.Error.API.loadingArticlesFromServerErrorMessage)
+        default:
+            unexpectedCodePath(message: "\(String(describing: self)) incorrect view state update.")
+        }
+    }
+    
     private func showLoading() {
         setViewState(.loading)
     }
@@ -121,14 +133,15 @@ extension ArticlesListViewModel {
         self.error = error
         stateMachine.tryEvent(.loadArticlesFailure)
     }
+}
     
-    
+  
+// MARK: - Filter articles logic
+
+extension ArticlesListViewModel {
     private func getAllCategories() -> [Article.Category] {
         allArticles.map { $0.category }.unique
     }
-        
-    
-    // MARK: - Filter articles
     
     private func filterArticlesForCategory(_ category: Article.Category?) {
         filterCategory = category
@@ -141,6 +154,7 @@ extension ArticlesListViewModel {
         return allArticles.filter { $0.category.id == filter.id }
     }
 }
+
 
 
 // MARK: - State changes
@@ -167,14 +181,14 @@ extension ArticlesListViewModel {
         case .start:
             break
         case .loadingArticles:
-            showLoading()
+            updateViewState()
             loadArticlesFromServer()
             break
         case .showArticles:
-            showArticlesList(filteredArticles)
+            updateViewState()
             break
         case .error:
-            showError(SDStrings.Error.API.loadingArticlesFromServerErrorMessage)
+            updateViewState()
             // Log and display an alert for the API error.
             if let error = error {
                 self.processError(error)

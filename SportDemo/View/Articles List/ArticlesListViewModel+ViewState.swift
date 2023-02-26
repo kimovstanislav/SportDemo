@@ -9,6 +9,7 @@ import Foundation
 
 extension ArticlesListViewModel {
     enum ViewState {
+        case none
         case loading
         case showEmptyList
         case showArticles(articles: [Article])

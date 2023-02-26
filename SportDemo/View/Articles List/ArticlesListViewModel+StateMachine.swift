@@ -22,7 +22,6 @@ extension ArticlesListViewModel {
             case loadArticles
             case loadArticlesSuccess
             case loadArticlesFailure
-            case filterArticlesByCategory
         }
         
         private(set) var state: State {
@@ -68,7 +67,6 @@ extension ArticlesListViewModel.StateMachine {
         case .showArticles:
             switch event {
                 case .loadArticles: return .loadingArticles
-                case .filterArticlesByCategory: return .showArticles
             default: break
             }
         case .error:

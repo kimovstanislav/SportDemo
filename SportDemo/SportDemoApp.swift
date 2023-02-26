@@ -11,7 +11,7 @@ import SwiftUI
 struct SportDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            EmptyView()//ArticlesListView(viewModel: ViewModelFactory.shared.makeArticlesListViewModel())
+            ArticlesListView(viewModel: ViewModelFactory.shared.makeArticlesListViewModel())
         }
     }
 }

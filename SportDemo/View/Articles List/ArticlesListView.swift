@@ -17,6 +17,9 @@ struct ArticlesListView: View {
     var body: some View {
         NavigationView {
             switch viewModel.viewState {
+            case .none:
+                EmptyView()
+                
             case .loading:
                 loaderView()
                 
